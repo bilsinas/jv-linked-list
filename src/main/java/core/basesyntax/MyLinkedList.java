@@ -106,30 +106,6 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
         return unlink(toRemove);
     }
 
-    private T unlink(Node<T> toRemove) {
-        final T oldValue = toRemove.getValue();
-        Node<T> prev = toRemove.getPrev();
-        Node<T> next = toRemove.getNext();
-
-        if (prev == null) {
-            head = next;
-        } else {
-            prev.setNext(next);
-            toRemove.setPrev(null);
-        }
-
-        if (next == null) {
-            tail = prev;
-        } else {
-            next.setPrev(prev);
-            toRemove.setNext(null);
-        }
-
-        toRemove.setValue(null);
-        size--;
-        return oldValue;
-    }
-
     @Override
     public boolean remove(T object) {
         Node<T> current = head;
@@ -161,6 +137,30 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
     @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    private T unlink(Node<T> toRemove) {
+        final T oldValue = toRemove.getValue();
+        Node<T> prev = toRemove.getPrev();
+        Node<T> next = toRemove.getNext();
+
+        if (prev == null) {
+            head = next;
+        } else {
+            prev.setNext(next);
+            toRemove.setPrev(null);
+        }
+
+        if (next == null) {
+            tail = prev;
+        } else {
+            next.setPrev(prev);
+            toRemove.setNext(null);
+        }
+
+        toRemove.setValue(null);
+        size--;
+        return oldValue;
     }
 
     private Node<T> getNode(int index) {
